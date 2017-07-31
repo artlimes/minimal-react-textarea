@@ -889,7 +889,7 @@ MinimalReactTextArea.defaultProps = {
   type: 'text',
   isDisabled: false,
   theme: 'normal',
-  rows: 3
+  rows: 1
 };
 
 if (process.env.NODE_ENV !== 'production') {
