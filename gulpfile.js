@@ -10,7 +10,8 @@ var taskConfig = {
 			'react',
 			'react-dom',
 			'create-react-class',
-			'prop-types'
+			'prop-types',
+			'minimal-react-text'
 		],
 		less: {
 			path: 'less',

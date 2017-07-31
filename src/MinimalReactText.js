@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import MinimalReactText from "minimal-react-text";
 
-class MinimalReactText extends Component {
+class MinimalReactTextArea extends MinimalReactText {
   constructor(props) {
     super(props);
 
@@ -205,4 +206,4 @@ if (process.env.NODE_ENV !== 'production') {
  };
 }
 
-export default MinimalReactText;
+export default MinimalReactTextArea;

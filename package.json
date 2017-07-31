@@ -1,5 +1,5 @@
 {
-  "name": "minimal-react-text",
+  "name": "minimal-react-textarea",
   "version": "1.0.0-rc.4",
   "description": "A Select control built with and for ReactJS",
   "main": "lib/MinimalReactText.js",
@@ -8,11 +8,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/artlimes/minimal-react-text.git"
+    "url": "https://github.com/artlimes/minimal-react-textarea.git"
   },
   "dependencies": {
-    "create-react-class": "^15.5.2",
     "classnames": "^2.2.4",
+    "create-react-class": "^15.5.2",
+    "minimal-react-text": "git+https://github.com/artlimes/minimal-react-text.git",
     "prop-types": "^15.5.8"
   },
   "devDependencies": {
