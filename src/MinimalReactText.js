@@ -2,6 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import MinimalReactText from "minimal-react-text";
+import autosize from 'autosize';
+import getLineHeight from 'line-height';
+
+const UPDATE = 'autosize:update',
+  DESTROY = 'autosize:destroy',
+  RESIZED = 'autosize:resized';
+
+/** A light replacement for built-in textarea component
+ * which automaticaly adjusts its height to match the content
+ * @param onResize - called whenever the textarea resizes
+ * @param rows - minimum number of visible rows
+ * @param maxRows - maximum number of visible rows
+ * @param innerRef - called with the ref to the DOM node
+ */
 
 class MinimalReactTextArea extends MinimalReactText {
   constructor(props) {
@@ -15,15 +29,16 @@ class MinimalReactTextArea extends MinimalReactText {
     if (inputValue !== '' && typeof inputValue !== 'undefined') {
       hasValue = true;
       hasError = props.hasError || (props.pattern && !props.pattern.test(inputValue));
-   }
+    }
 
     this.state = {
       hasValue,
       hasError,
       inputValue,
-      isFocused
-   };
- }
+      isFocused,
+      lineHeight: null
+    };
+  }
 
   componentWillReceiveProps(nextProps) {
     let hasError = nextProps.hasError;
@@ -33,9 +48,9 @@ class MinimalReactTextArea extends MinimalReactText {
     if (!hasError && inputValue !== '' && typeof inputValue !== 'undefined' && !!nextProps.pattern) {
       hasValue = true;
       hasError = (nextProps.pattern && !nextProps.pattern.test(inputValue));
-   }
+    }
     this.setState({ hasValue, hasError, inputValue });
- }
+  }
 
   onBlur(event) {
     this.setState({
@@ -46,9 +61,9 @@ class MinimalReactTextArea extends MinimalReactText {
     let hasError;
 
     this.setState({
-        hasValue: Boolean(event.currentTarget.value),
-        hasError: (event.currentTarget.value.length ? (pattern && !pattern.test(event.currentTarget.value)) : isRequired)
-     });
+      hasValue: Boolean(event.currentTarget.value),
+      hasError: (event.currentTarget.value.length ? (pattern && !pattern.test(event.currentTarget.value)) : isRequired)
+    });
 
     // update on this.setState happens after this functions is completed
     // in order to avoid that 'skipped' change of value, I use the
@@ -60,29 +75,106 @@ class MinimalReactTextArea extends MinimalReactText {
     } else if (this.props.onChange) {
       this.props.onChange(event, this, hasError);
     }
- }
+  }
 
   onChange(event) {
     this.setState({
       hasValue: Boolean(event.currentTarget.value),
       inputValue: event.currentTarget.value,
       hasError: false
-   });
+    });
+
+    this.currentValue = e.target.value;
 
     if (this.props.onChange) {
       this.props.onChange(event, this);
-   }
- }
+    }
+  }
 
   onFocus(event) {
     this.setState({
       isFocused: true
-   });
+    });
 
     if (this.props.onFocus) {
       this.props.onFocus(event, this);
-   }
- }
+    }
+  }
+
+  // autosize methods
+
+  componentDidMount() {
+    const { onResize, maxRows } = this.props;
+
+    if (typeof maxRows === 'number') {
+      this.updateLineHeight();
+
+      // this trick is needed to force "autosize" to activate the scrollbar
+      setTimeout(() => autosize(this.textarea));
+    } else {
+      autosize(this.textarea);
+    }
+
+    if (onResize) {
+      this.textarea.addEventListener(RESIZED, this.props.onResize);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.props.onResize) {
+      this.textarea.removeEventListener(RESIZED, this.props.onResize);
+    }
+    () => this.dispatchEvent(DESTROY);
+  }
+
+  componentDidUpdate() {
+    if (this.getValue(this.props) !== this.currentValue) {
+    () =>   this.dispatchEvent(UPDATE);
+    }
+  }
+
+  updateLineHeight() {
+    this.setState({
+      lineHeight: getLineHeight(this.textarea)
+    });
+  }
+
+  getValue({ valueLink, value }) {
+    valueLink ? valueLink.value : value;
+  }
+
+  // onChange(e) {
+  //   this.currentValue = e.target.value;
+  //   this.props.onChange && this.props.onChange(e);
+  // }
+
+  saveDOMNodeRef(ref) {
+    const { innerRef } = this.props;
+
+    if (innerRef) {
+      innerRef(ref);
+    }
+
+    this.textarea = ref;
+  }
+
+  getLocals() {
+    const {
+      props: { onResize, maxRows, onChange, style, innerRef, ...props }, // eslint-disable-line no-unused-vars
+      state: { lineHeight },
+      saveDOMNodeRef
+    } = this;
+
+    const maxHeight = maxRows && lineHeight ? lineHeight * maxRows : null;
+
+    return {
+      ...props,
+      saveDOMNodeRef,
+      style: maxHeight ? { ...style, maxHeight } : style,
+      onChange: () => this.onChange
+    };
+  }
+
 
   render() {
     const {
@@ -123,6 +215,9 @@ class MinimalReactTextArea extends MinimalReactText {
 
     const fieldRequiredMessage = 'Field is required';
 
+    // autosize
+    const { children, saveDOMNodeRef, ...locals } = this.getLocals();
+
     return (
       <div className={wrapperClasses}>
         <div>
@@ -144,7 +239,6 @@ class MinimalReactTextArea extends MinimalReactText {
             /> :
             <textarea
               autoComplete={this.props.autoComplete}
-              className={inputClasses}
               disabled={isDisabled}
               id={id}
               type={type}
@@ -156,8 +250,12 @@ class MinimalReactTextArea extends MinimalReactText {
               onFocus={this.onFocus.bind(this)}
               onBlur={this.onBlur.bind(this)}
               onChange={this.onChange.bind(this)}
-            />
-         }
+              {...locals}
+              ref={saveDOMNodeRef.bind(this)}
+            >
+              {children}
+            </textarea>
+          }
           {label ? <label className={labelClasses}
             htmlFor={id}
                    >
@@ -170,40 +268,45 @@ class MinimalReactTextArea extends MinimalReactText {
           </p> : null}
       </div>
     );
- }
+  }
 }
 
-MinimalReactText.defaultProps = {
+MinimalReactTextArea.defaultProps = {
   autoComplete: false,
   type: 'text',
   isDisabled: false,
   theme: 'normal',
-  size: 'normal'
+  size: 'normal',
+  rows: 1
 };
 
 if (process.env.NODE_ENV !== 'production') {
-  MinimalReactText.propTypes = {
-    'autoComplete': PropTypes.bool,
-    'wrapperClasses': PropTypes.string,
-    'inputClasses': PropTypes.string,
-    'labelClasses': PropTypes.string,
-    'errortextClasses': PropTypes.string,
+  MinimalReactTextArea.propTypes = {
+    autoComplete: PropTypes.bool,
+    wrapperClasses: PropTypes.string,
+    inputClasses: PropTypes.string,
+    labelClasses: PropTypes.string,
+    errortextClasses: PropTypes.string,
     'data-event-action': PropTypes.string,
-    'id': PropTypes.string,
-    'inputName': PropTypes.string,
-    'inputValue': PropTypes.oneOfType([
+    id: PropTypes.string,
+    inputName: PropTypes.string,
+    inputValue: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number]),
-    'isDisabled': PropTypes.bool,
-    'isRequired': PropTypes.bool,
-    'onChange': PropTypes.func,
-    'pattern': PropTypes.any,
-    'placeholder': PropTypes.string,
-    'size': PropTypes.string,
-    'theme': PropTypes.string,
-    'type': PropTypes.string.isRequired,
-    'hasError': PropTypes.bool
- };
+    isDisabled: PropTypes.bool,
+    isRequired: PropTypes.bool,
+    onChange: PropTypes.func,
+    pattern: PropTypes.any,
+    placeholder: PropTypes.string,
+    size: PropTypes.string,
+    theme: PropTypes.string,
+    type: PropTypes.string.isRequired,
+    hasError: PropTypes.bool,
+    rows: PropTypes.number,
+    maxRows: PropTypes.number,
+    onResize: PropTypes.func,
+    innerRef: PropTypes.func
+  };
 }
 
 export default MinimalReactTextArea;
