@@ -23,6 +23,7 @@ class MinimalReactTextArea extends MinimalReactText {
 
     let hasValue = false;
     let hasError = false;
+    let lineHeight = null;
     const isFocused = false;
     const inputValue = props.inputValue;
 
@@ -36,45 +37,8 @@ class MinimalReactTextArea extends MinimalReactText {
       hasError,
       inputValue,
       isFocused,
-      lineHeight: null
+      lineHeight
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    let hasError = nextProps.hasError;
-    let hasValue = !!nextProps.inputValue || this.state.hasValue;
-    const inputValue = (nextProps.inputValue !== undefined ? nextProps.inputValue : this.state.inputValue);
-
-    if (!hasError && inputValue !== '' && typeof inputValue !== 'undefined' && !!nextProps.pattern) {
-      hasValue = true;
-      hasError = (nextProps.pattern && !nextProps.pattern.test(inputValue));
-    }
-    this.setState({ hasValue, hasError, inputValue });
-  }
-
-  onBlur(event) {
-    this.setState({
-      isFocused: false
-    });
-
-    const { pattern, isRequired } = this.props;
-    let hasError;
-
-    this.setState({
-      hasValue: Boolean(event.currentTarget.value),
-      hasError: (event.currentTarget.value.length ? (pattern && !pattern.test(event.currentTarget.value)) : isRequired)
-    });
-
-    // update on this.setState happens after this functions is completed
-    // in order to avoid that 'skipped' change of value, I use the
-    // hasError variable
-    hasError = (event.currentTarget.value.length ? (pattern && !pattern.test(event.currentTarget.value)) : isRequired);
-
-    if (this.props.onBlur) {
-      this.props.onBlur(event, this, hasError);
-    } else if (this.props.onChange) {
-      this.props.onChange(event, this, hasError);
-    }
   }
 
   onChange(event) {
@@ -88,16 +52,6 @@ class MinimalReactTextArea extends MinimalReactText {
 
     if (this.props.onChange) {
       this.props.onChange(event, this);
-    }
-  }
-
-  onFocus(event) {
-    this.setState({
-      isFocused: true
-    });
-
-    if (this.props.onFocus) {
-      this.props.onFocus(event, this);
     }
   }
 
@@ -143,11 +97,6 @@ class MinimalReactTextArea extends MinimalReactText {
     valueLink ? valueLink.value : value;
   }
 
-  // onChange(e) {
-  //   this.currentValue = e.target.value;
-  //   this.props.onChange && this.props.onChange(e);
-  // }
-
   saveDOMNodeRef(ref) {
     const { innerRef } = this.props;
 
@@ -171,7 +120,7 @@ class MinimalReactTextArea extends MinimalReactText {
       ...props,
       saveDOMNodeRef,
       style: maxHeight ? { ...style, maxHeight } : style,
-      onChange: () => this.onChange
+      onChange: this.onChange.bind(this)
     };
   }
 
@@ -184,24 +133,22 @@ class MinimalReactTextArea extends MinimalReactText {
       isRequired,
       label,
       placeholder,
-      size,
-      theme,
-      type } = this.props;
+      theme } = this.props;
 
     const { hasValue, hasError, inputValue, isFocused } = this.state;
 
     const wrapperClasses = classNames(
       'tx-wrapper',
+      'tx-wrapper-textarea',
       this.props.wrapperClasses,
       { 'tx-focused': isFocused },
       { 'tx-disabled': isDisabled },
-      { 'tx-wrapper-textarea': type === 'textarea' },
       { 'tx-wrapper-white': theme === 'dark' });
 
     const inputClasses = classNames(
       'tx-input',
-      this.props.inputClasses,
-      { 'tx-textarea-large': size === 'large' });
+      this.props.inputClasses
+    );
 
     const labelClasses = classNames(
       'tx-label',
@@ -221,41 +168,24 @@ class MinimalReactTextArea extends MinimalReactText {
     return (
       <div className={wrapperClasses}>
         <div>
-          {type !== 'textarea' ?
-            <input
-              autoComplete={this.props.autoComplete}
-              className={inputClasses}
-              disabled={isDisabled}
-              id={id}
-              type={type}
-              required={isRequired}
-              value={inputValue || ''}
-              data-event-action={this.props['data-event-action']}
-              name={this.props.inputName}
-              placeholder={placeholder}
-              onFocus={this.onFocus.bind(this)}
-              onBlur={this.onBlur.bind(this)}
-              onChange={this.onChange.bind(this)}
-            /> :
-            <textarea
-              autoComplete={this.props.autoComplete}
-              disabled={isDisabled}
-              id={id}
-              type={type}
-              required={isRequired}
-              value={inputValue || ''}
-              data-event-action={this.props['data-event-action']}
-              name={this.props.inputName}
-              placeholder={placeholder}
-              onFocus={this.onFocus.bind(this)}
-              onBlur={this.onBlur.bind(this)}
-              onChange={this.onChange.bind(this)}
-              {...locals}
-              ref={saveDOMNodeRef.bind(this)}
-            >
-              {children}
-            </textarea>
-          }
+          <textarea
+            autoComplete={this.props.autoComplete}
+            className={inputClasses}
+            disabled={isDisabled}
+            id={id}
+            required={isRequired}
+            value={inputValue || ''}
+            data-event-action={this.props['data-event-action']}
+            name={this.props.inputName}
+            placeholder={placeholder}
+            onFocus={this.onFocus.bind(this)}
+            onBlur={this.onBlur.bind(this)}
+            onChange={this.onChange.bind(this)}
+            {...locals}
+            ref={saveDOMNodeRef.bind(this)}
+          >
+            {children}
+          </textarea>
           {label ? <label className={labelClasses}
             htmlFor={id}
                    >
@@ -276,8 +206,7 @@ MinimalReactTextArea.defaultProps = {
   type: 'text',
   isDisabled: false,
   theme: 'normal',
-  size: 'normal',
-  rows: 1
+  rows: 3
 };
 
 if (process.env.NODE_ENV !== 'production') {
@@ -298,9 +227,7 @@ if (process.env.NODE_ENV !== 'production') {
     onChange: PropTypes.func,
     pattern: PropTypes.any,
     placeholder: PropTypes.string,
-    size: PropTypes.string,
     theme: PropTypes.string,
-    type: PropTypes.string.isRequired,
     hasError: PropTypes.bool,
     rows: PropTypes.number,
     maxRows: PropTypes.number,
