@@ -1,0 +1,40 @@
+{
+  "name": "minimal-react-text",
+  "main": [
+    "dist/minimal-react-text.min.js",
+    "dist/minimal-react-text.min.css"
+  ],
+  "version": "1.0.0-rc.4",
+  "homepage": "https://github.com/artlimes/minimal-react-text",
+  "authors": [
+    "Artlimes"
+  ],
+  "description": "A float label input built with and for ReactJS",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "dependencies": {
+    "classnames": "^2.2.0",
+  },
+  "keywords": [
+    "react",
+    "react-component",
+    "floatlabel",
+    "textarea",
+    "input",
+    "form",
+    "ui"
+  ],
+  "license": "MIT",
+  "ignore": [
+    ".editorconfig",
+    ".gitignore",
+    "package.json",
+    "src",
+    "node_modules",
+    "example",
+    "test"
+  ]
+}
