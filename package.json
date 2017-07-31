@@ -11,8 +11,10 @@
     "url": "https://github.com/artlimes/minimal-react-textarea.git"
   },
   "dependencies": {
+    "autosize": "^4.0.0",
     "classnames": "^2.2.4",
     "create-react-class": "^15.5.2",
+    "line-height": "^0.3.1",
     "minimal-react-text": "git+https://github.com/artlimes/minimal-react-text.git",
     "prop-types": "^15.5.8"
   },
