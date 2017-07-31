@@ -109,7 +109,7 @@ class MinimalReactTextArea extends MinimalReactText {
 
   getLocals() {
     const {
-      props: { onResize, maxRows, onChange, style, innerRef, ...props }, // eslint-disable-line no-unused-vars
+      props: { onResize, maxRows, onChange, style, innerRef }, // eslint-disable-line no-unused-vars
       state: { lineHeight },
       saveDOMNodeRef
     } = this;
@@ -117,7 +117,6 @@ class MinimalReactTextArea extends MinimalReactText {
     const maxHeight = maxRows && lineHeight ? lineHeight * maxRows : null;
 
     return {
-      ...props,
       saveDOMNodeRef,
       style: maxHeight ? { ...style, maxHeight } : style,
       onChange: this.onChange.bind(this)

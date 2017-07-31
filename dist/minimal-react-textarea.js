@@ -791,19 +791,16 @@ var MinimalReactTextArea = (function (_MinimalReactText) {
       var onChange = _props2.onChange;
       var style = _props2.style;
       var innerRef = _props2.innerRef;
-
-      var props = _objectWithoutProperties(_props2, ['onResize', 'maxRows', 'onChange', 'style', 'innerRef']);
-
       var lineHeight = this.state.lineHeight;
       var saveDOMNodeRef = this.saveDOMNodeRef;
 
       var maxHeight = maxRows && lineHeight ? lineHeight * maxRows : null;
 
-      return _extends({}, props, {
+      return {
         saveDOMNodeRef: saveDOMNodeRef,
         style: maxHeight ? _extends({}, style, { maxHeight: maxHeight }) : style,
         onChange: this.onChange.bind(this)
-      });
+      };
     }
   }, {
     key: 'render',
