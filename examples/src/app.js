@@ -11,11 +11,11 @@ ReactDOM.render(
       <MinimalReactTextarea label="Label" maxRows={5} rows={1} />
 
     <h3>Large Textarea</h3>
-      <MinimalReactTextarea label="Label" isRequired={true} isDisabled={true} value={"Lalakia"}/>
+      <MinimalReactTextarea label="Label" isRequired={true} isDisabled={true} value={"Lalakia"} rows={2} />
 
     <h3>Dark Theme</h3>
     <div className="dark-background">
-      <MinimalReactTextarea label="Label" isRequired={true} theme="dark"/>
+      <MinimalReactTextarea label="Label" isRequired={true} theme="dark" rows={3} />
     </div>
 	</div>
     <button type="submit">Submit</button>
