@@ -132,9 +132,13 @@
   display: none;
 }
 .tx-wrapper-textarea textarea {
+  height: 60px;
   margin-top: 20px;
   padding: 0;
   resize: none;
+}
+.tx-wrapper-textarea textarea.tx-textarea-large {
+  height: 100px;
 }
 .tx-wrapper-textarea .tx-label {
   left: 10px;
@@ -162,4 +166,19 @@
 .tx-wrapper input {
   margin: 0;
   padding: 0;
+}
+.tx-wrapper.tx-focused .tx-input,
+.tx-wrapper.tx-focused textarea {
+  color: #ff115f;
+  text-shadow: 0 0 0 #fff;
+  -webkit-text-fill-color: #000;
+}
+.tx-wrapper-white.tx-focused .tx-input,
+.tx-wrapper-white.tx-focused textarea {
+  -webkit-text-fill-color: #fff;
+}
+.tx-wrapper-textarea textarea {
+  margin-top: 20px;
+  padding: 0;
+  resize: none;
 }

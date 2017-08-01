@@ -17,28 +17,9 @@ const UPDATE = 'autosize:update',
  * @param innerRef - called with the ref to the DOM node
  */
 
-class MinimalReactTextArea extends MinimalReactText {
+class MinimalReactTextarea extends MinimalReactText {
   constructor(props) {
     super(props);
-
-    let hasValue = false;
-    let hasError = false;
-    let lineHeight = null;
-    const isFocused = false;
-    const inputValue = props.inputValue;
-
-    if (inputValue !== '' && typeof inputValue !== 'undefined') {
-      hasValue = true;
-      hasError = props.hasError || (props.pattern && !props.pattern.test(inputValue));
-    }
-
-    this.state = {
-      hasValue,
-      hasError,
-      inputValue,
-      isFocused,
-      lineHeight
-    };
   }
 
   onChange(event) {
@@ -200,7 +181,7 @@ class MinimalReactTextArea extends MinimalReactText {
   }
 }
 
-MinimalReactTextArea.defaultProps = {
+MinimalReactTextarea.defaultProps = {
   autoComplete: false,
   type: 'text',
   isDisabled: false,
@@ -209,7 +190,7 @@ MinimalReactTextArea.defaultProps = {
 };
 
 if (process.env.NODE_ENV !== 'production') {
-  MinimalReactTextArea.propTypes = {
+  MinimalReactTextarea.propTypes = {
     autoComplete: PropTypes.bool,
     wrapperClasses: PropTypes.string,
     inputClasses: PropTypes.string,
@@ -235,4 +216,4 @@ if (process.env.NODE_ENV !== 'production') {
   };
 }
 
-export default MinimalReactTextArea;
+export default MinimalReactTextarea;
