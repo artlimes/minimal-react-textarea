@@ -163,6 +163,7 @@ class MinimalReactTextarea extends MinimalReactText {
             onChange={this.onChange.bind(this)}
             {...locals}
             ref={saveDOMNodeRef.bind(this)}
+            rows="1"
           >
             {children}
           </textarea>

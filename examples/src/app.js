@@ -8,14 +8,14 @@ ReactDOM.render(
   <form noValidate>
 	<div>
     <h3>Normal Textarea</h3>
-      <MinimalReactTextarea label="Label" maxRows={5} rows={1} />
+      <MinimalReactTextarea label="Label" maxRows={10} rows={1} />
 
     <h3>Large Textarea</h3>
-      <MinimalReactTextarea label="Label" isRequired={true} isDisabled={true} value={"Lalakia"} rows={2} />
+      <MinimalReactTextarea label="Label" isRequired={true} isDisabled={true} value={"Lalakia"} rows={4} />
 
     <h3>Dark Theme</h3>
     <div className="dark-background">
-      <MinimalReactTextarea label="Label" isRequired={true} theme="dark" rows={3} />
+      <MinimalReactTextarea label="Label" isRequired={true} theme="dark" rows={8} placeholder="This is a big enough placeholder to occupy two lines" />
     </div>
 	</div>
     <button type="submit">Submit</button>

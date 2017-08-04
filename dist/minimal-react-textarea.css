@@ -124,29 +124,19 @@
   -webkit-text-fill-color: #fff;
 }
 .tx-wrapper-textarea div {
-  padding: 10px 10px 5px;
-  border: 1px solid #9b9b9b;
-  border-radius: 4px;
+  border-bottom: 1px solid #9b9b9b;
 }
 .tx-wrapper-textarea div:after {
   display: none;
 }
+.tx-wrapper-textarea .tx-input,
 .tx-wrapper-textarea textarea {
-  margin-top: 20px;
   padding: 0;
+  margin-top: 2px;
+  margin-bottom: 2px !important;
   resize: none;
-}
-.tx-wrapper-textarea .tx-label {
-  left: 10px;
-  transition: transform 250ms;
-  transform: translateY(0px);
-}
-.tx-wrapper-textarea .tx-label.tx-above {
-  transform: translateY(0px);
-}
-.tx-wrapper-textarea.tx-focused .tx-label.tx-above {
-  transition: transform 250ms;
-  transform: translateY(0px) scale(0.875, 0.875);
+  height: 18px;
+  vertical-align: text-top;
 }
 .tx-wrapper > div {
   border-bottom: 1px solid #9b9b9b;

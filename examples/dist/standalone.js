@@ -841,7 +841,8 @@ var MinimalReactTextarea = (function (_MinimalReactText) {
               onBlur: this.onBlur.bind(this),
               onChange: this.onChange.bind(this)
             }, locals, {
-              ref: saveDOMNodeRef.bind(this)
+              ref: saveDOMNodeRef.bind(this),
+              rows: '1'
             }),
             children
           ),
