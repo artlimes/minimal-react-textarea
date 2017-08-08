@@ -39,15 +39,15 @@ class MinimalReactTextarea extends MinimalReactText {
   // autosize methods
 
   componentDidMount() {
-    const { onResize, maxRows } = this.props;
+    const { onResize, maxRows, autosizeDelay } = this.props;
 
     if (typeof maxRows === 'number') {
       this.updateLineHeight();
 
       // this trick is needed to force "autosize" to activate the scrollbar
-      setTimeout(() => autosize(this.textarea));
+      setTimeout((autosizeDelay) => autosize(this.textarea));
     } else {
-      autosize(this.textarea);
+      setTimeout((autosizeDelay) => autosize(this.textarea));
     }
 
     if (onResize) {
@@ -187,7 +187,8 @@ MinimalReactTextarea.defaultProps = {
   type: 'text',
   isDisabled: false,
   theme: 'normal',
-  rows: 1
+  rows: 1,
+  autosizeDelay: 0
 };
 
 if (process.env.NODE_ENV !== 'production') {
@@ -213,7 +214,8 @@ if (process.env.NODE_ENV !== 'production') {
     rows: PropTypes.number,
     maxRows: PropTypes.number,
     onResize: PropTypes.func,
-    innerRef: PropTypes.func
+    innerRef: PropTypes.func,
+    autosizeDelay: PropTypes.number
   };
 }
 

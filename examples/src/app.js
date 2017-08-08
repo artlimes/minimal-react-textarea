@@ -8,7 +8,7 @@ ReactDOM.render(
   <form noValidate>
 	<div>
     <h3>Normal Textarea</h3>
-      <MinimalReactTextarea label="Label" maxRows={10} rows={1} />
+      <MinimalReactTextarea label="Label" maxRows={10} rows={1} autosizeDelay={1000}/>
 
     <h3>Large Textarea</h3>
       <MinimalReactTextarea label="Label" isRequired={true} isDisabled={true} value={"Lalakia"} rows={4} />
