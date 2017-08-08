@@ -45,9 +45,9 @@ class MinimalReactTextarea extends MinimalReactText {
       this.updateLineHeight();
 
       // this trick is needed to force "autosize" to activate the scrollbar
-      setTimeout((autosizeDelay) => autosize(this.textarea));
+      setTimeout(() => {autosize(this.textarea)}, autosizeDelay);
     } else {
-      setTimeout((autosizeDelay) => autosize(this.textarea));
+      setTimeout(() => {autosize(this.textarea)}, autosizeDelay);
     }
 
     if (onResize) {
