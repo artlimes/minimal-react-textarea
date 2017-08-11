@@ -39,6 +39,12 @@ class MinimalReactTextarea extends MinimalReactText {
   shouldComponentUpdate (nextProps, nextState) {
     const propsTocheck = [ 'inputValue', 'hasError', 'data-event-action', 'wrapperClasses', 'inputClasses', 'labelClasses', 'errortextClasses'];
 
+    for ( let key in nextState ) {
+      if (this.state[key] !== nextState[key]) {
+        return true;
+      }
+    }
+
     for (let i = 0 ; i<propsTocheck.length; i++) {
       let propToCheck = propsTocheck[i];
       if (this.props[propToCheck] !== nextProps[propToCheck]) {
