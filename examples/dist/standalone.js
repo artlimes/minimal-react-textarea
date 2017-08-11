@@ -687,6 +687,19 @@ var MinimalReactTextarea = (function (_MinimalReactText) {
         this.props.onChange(event, this);
       }
     }
+  }, {
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      var propsTocheck = ['inputValue', 'hasError', 'data-event-action', 'wrapperClasses', 'inputClasses', 'labelClasses', 'errortextClasses'];
+
+      for (var i = 0; i < propsTocheck.length; i++) {
+        var propToCheck = propsTocheck[i];
+        if (this.props[propToCheck] !== nextProps[propToCheck]) {
+          return true;
+        }
+      }
+      return false;
+    }
 
     // autosize methods
 
