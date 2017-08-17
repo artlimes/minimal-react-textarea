@@ -28,7 +28,7 @@ _reactDom2['default'].render(_react2['default'].createElement(
       null,
       'Normal Textarea'
     ),
-    _react2['default'].createElement(_componentsMinimalReactText2['default'], { label: 'Label', maxRows: 10, rows: 1, autosizeDelay: 1000 }),
+    _react2['default'].createElement(_componentsMinimalReactText2['default'], { label: 'Label', placeholder: 'This is a placeholder', maxRows: 10, rows: 1, autosizeDelay: 1000 }),
     _react2['default'].createElement(
       'h3',
       null,

@@ -33,52 +33,65 @@
   font-size: 16px;
   line-height: 20px;
 }
-.tx-wrapper .tx-input {
+.tx-wrapper .tx-input,
+.tx-wrapper textarea {
   color: #212125;
   line-height: 18px;
   font-size: 14px;
   position: relative;
   z-index: 2;
-  top: 6px;
+  top: 4px;
   width: 100%;
   margin-bottom: 4px;
   border: none;
   outline: none;
   background-color: transparent;
 }
-.tx-wrapper .tx-input::-webkit-input-placeholder {
+.tx-wrapper .tx-input::-webkit-input-placeholder,
+.tx-wrapper textarea::-webkit-input-placeholder {
+  color: #9b9b9b;
   font-size: 14px;
   font-weight: 300;
   line-height: 18px;
 }
-.tx-wrapper .tx-input:-moz-placeholder {
+.tx-wrapper .tx-input:-moz-placeholder,
+.tx-wrapper textarea:-moz-placeholder {
+  color: #9b9b9b;
   font-size: 14px;
   /* FF 4-18 */
   font-weight: 300;
   line-height: 18px;
 }
-.tx-wrapper .tx-input::-moz-placeholder {
+.tx-wrapper .tx-input::-moz-placeholder,
+.tx-wrapper textarea::-moz-placeholder {
+  color: #9b9b9b;
   font-size: 14px;
   /* FF 19+ */
   font-weight: 300;
   line-height: 18px;
 }
-.tx-wrapper .tx-input:-ms-input-placeholder {
+.tx-wrapper .tx-input:-ms-input-placeholder,
+.tx-wrapper textarea:-ms-input-placeholder {
+  color: #9b9b9b;
   font-size: 14px;
   /* IE 10+ */
   font-weight: 300;
   line-height: 18px;
 }
-.tx-wrapper .tx-input:-webkit-autofill {
+.tx-wrapper .tx-input:-webkit-autofill,
+.tx-wrapper textarea:-webkit-autofill {
   -webkit-text-fill-color: #212125;
 }
-.tx-wrapper .tx-input:-webkit-autofill:focus {
+.tx-wrapper .tx-input:-webkit-autofill:focus,
+.tx-wrapper textarea:-webkit-autofill:focus {
   -webkit-text-fill-color: #212125;
 }
-.tx-wrapper .tx-input:disabled {
+.tx-wrapper .tx-input:disabled,
+.tx-wrapper textarea:disabled {
   background-color: transparent;
 }
-.tx-wrapper .tx-input:required + .tx-label:after {
+.tx-wrapper .tx-input:required + .tx-label:after,
+.tx-wrapper textarea:required + .tx-label:after {
   content: " *";
 }
 .tx-wrapper .tx-label {
@@ -102,6 +115,7 @@
   visibility: hidden;
   min-height: 15px;
   color: #d7001a;
+  float: left;
 }
 .tx-wrapper .tx-errortext.tx-errortext-visible {
   visibility: visible;
@@ -133,7 +147,7 @@ pa .tx-wrapper-textarea div:after {
 .tx-wrapper-textarea textarea {
   padding: 0;
   margin-top: 2px;
-  margin-bottom: 2px !important;
+  margin-bottom: 6px !important;
   resize: none;
   height: 18px;
   vertical-align: text-top;
