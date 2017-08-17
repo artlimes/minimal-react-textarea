@@ -42,7 +42,7 @@
   z-index: 2;
   top: 4px;
   width: 100%;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   border: none;
   outline: none;
   background-color: transparent;
@@ -146,7 +146,6 @@ pa .tx-wrapper-textarea div:after {
 .tx-wrapper-textarea .tx-input,
 .tx-wrapper-textarea textarea {
   padding: 0;
-  margin-bottom: 6px !important;
   resize: none;
   height: 18px;
   vertical-align: text-top;
