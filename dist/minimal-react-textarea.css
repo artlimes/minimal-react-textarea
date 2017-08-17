@@ -146,7 +146,6 @@ pa .tx-wrapper-textarea div:after {
 .tx-wrapper-textarea .tx-input,
 .tx-wrapper-textarea textarea {
   padding: 0;
-  margin-top: 2px;
   margin-bottom: 6px !important;
   resize: none;
   height: 18px;
