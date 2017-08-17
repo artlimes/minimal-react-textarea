@@ -2,6 +2,7 @@
   position: relative;
   padding-top: @label-line-height;
   text-align: left;
+  margin: 20px 0;
   &.tx-focused {
     div {
       &:after {
@@ -18,7 +19,7 @@
       color: @focused-color;
       text-shadow: 0 0 0 @white-basic-color;
 
-      -webkit-text-fill-color: #000;
+      -webkit-text-fill-color: @input-color;
     }
   }
   &.tx-disabled {
@@ -29,49 +30,50 @@
       display: block;
       width: 100%;
       height: 1px;
-      margin-bottom: 5px;
       content: "";
       transform: translateY(50%) scaleY(1);
       transform-origin: center bottom;
       background-color: @underline-color;
     }
   }
-  .tx-input,
   .tx-label {
     font-size: @label-font-size;
     line-height: @label-line-height;
   }
   .tx-input {
+    color:@input-color;
     line-height: @input-line-height;
+    font-size: @input-font-size;
     position: relative;
     z-index: 2;
+    top: 6px;
     width: 100%;
     margin-bottom: 4px;
     border: none;
     outline: none;
     background-color: transparent;
     &::-webkit-input-placeholder {
-      color: @white-underline-color;
+      // color: @white-underline-color;
       font-size: @input-font-size;
       font-weight: 300;
       line-height: @input-line-height;
     }
     &:-moz-placeholder {
-      color: @white-underline-color;
+      // color: @white-underline-color;
       font-size: @input-font-size;
       /* FF 4-18 */
       font-weight: 300;
       line-height: @input-line-height;
     }
     &::-moz-placeholder {
-      color: @white-underline-color;
+      // color: @white-underline-color;
       font-size: @input-font-size;
       /* FF 19+ */
       font-weight: 300;
       line-height: @input-line-height;
     }
     &:-ms-input-placeholder {
-      color: @white-underline-color;
+      // color: @white-underline-color;
       font-size: @input-font-size;
       /* IE 10+ */
       font-weight: 300;
@@ -95,12 +97,14 @@
     }
   }
   .tx-label {
+    color: @label-color;
     font-weight: normal;
     position: absolute;
     z-index: 1;
     left: 0;
     display: inline-block;
     transition: transform 250ms;
+    margin-bottom: 4px;
     &.tx-above {
       transition: transform 250ms;
       transform: translateY(-100%);
@@ -148,6 +152,7 @@
 .tx-wrapper-textarea {
   div {
     border-bottom: 1px solid @textarea-border-color;
+    pa
     &:after {
       display: none;
     }
@@ -167,6 +172,8 @@
   // to solve the sometimes visible ":after" of minimal-text
   & > div {
     border-bottom: 1px solid @white-underline-color;
+    padding-bottom: 4px;
+    min-height: 25px;
     &:after {
       display: none;
     }
