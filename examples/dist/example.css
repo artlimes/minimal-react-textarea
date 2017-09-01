@@ -2,6 +2,7 @@
   position: relative;
   padding-top: 20px;
   text-align: left;
+  margin: 20px 0;
 }
 .tx-wrapper.tx-focused div:after {
   background-color: #ff115f;
@@ -14,7 +15,7 @@
 .tx-wrapper.tx-focused textarea {
   color: #ff115f;
   text-shadow: 0 0 0 #fff;
-  -webkit-text-fill-color: #000;
+  -webkit-text-fill-color: #212125;
 }
 .tx-wrapper.tx-disabled {
   opacity: .4;
@@ -23,73 +24,85 @@
   display: block;
   width: 100%;
   height: 1px;
-  margin-bottom: 5px;
   content: "";
   transform: translateY(50%) scaleY(1);
   transform-origin: center bottom;
   background-color: #000;
 }
-.tx-wrapper .tx-input,
 .tx-wrapper .tx-label {
   font-size: 16px;
   line-height: 20px;
 }
-.tx-wrapper .tx-input {
+.tx-wrapper .tx-input,
+.tx-wrapper textarea {
+  color: #212125;
   line-height: 18px;
+  font-size: 14px;
   position: relative;
   z-index: 2;
+  top: 4px;
   width: 100%;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   border: none;
   outline: none;
   background-color: transparent;
 }
-.tx-wrapper .tx-input::-webkit-input-placeholder {
+.tx-wrapper .tx-input::-webkit-input-placeholder,
+.tx-wrapper textarea::-webkit-input-placeholder {
   color: #9b9b9b;
   font-size: 14px;
   font-weight: 300;
   line-height: 18px;
 }
-.tx-wrapper .tx-input:-moz-placeholder {
+.tx-wrapper .tx-input:-moz-placeholder,
+.tx-wrapper textarea:-moz-placeholder {
   color: #9b9b9b;
   font-size: 14px;
   /* FF 4-18 */
   font-weight: 300;
   line-height: 18px;
 }
-.tx-wrapper .tx-input::-moz-placeholder {
+.tx-wrapper .tx-input::-moz-placeholder,
+.tx-wrapper textarea::-moz-placeholder {
   color: #9b9b9b;
   font-size: 14px;
   /* FF 19+ */
   font-weight: 300;
   line-height: 18px;
 }
-.tx-wrapper .tx-input:-ms-input-placeholder {
+.tx-wrapper .tx-input:-ms-input-placeholder,
+.tx-wrapper textarea:-ms-input-placeholder {
   color: #9b9b9b;
   font-size: 14px;
   /* IE 10+ */
   font-weight: 300;
   line-height: 18px;
 }
-.tx-wrapper .tx-input:-webkit-autofill {
+.tx-wrapper .tx-input:-webkit-autofill,
+.tx-wrapper textarea:-webkit-autofill {
   -webkit-text-fill-color: #212125;
 }
-.tx-wrapper .tx-input:-webkit-autofill:focus {
+.tx-wrapper .tx-input:-webkit-autofill:focus,
+.tx-wrapper textarea:-webkit-autofill:focus {
   -webkit-text-fill-color: #212125;
 }
-.tx-wrapper .tx-input:disabled {
+.tx-wrapper .tx-input:disabled,
+.tx-wrapper textarea:disabled {
   background-color: transparent;
 }
-.tx-wrapper .tx-input:required + .tx-label:after {
+.tx-wrapper .tx-input:required + .tx-label:after,
+.tx-wrapper textarea:required + .tx-label:after {
   content: " *";
 }
 .tx-wrapper .tx-label {
+  color: #4A4A4A;
   font-weight: normal;
   position: absolute;
   z-index: 1;
   left: 0;
   display: inline-block;
   transition: transform 250ms;
+  margin-bottom: 4px;
 }
 .tx-wrapper .tx-label.tx-above {
   transition: transform 250ms;
@@ -102,6 +115,7 @@
   visibility: hidden;
   min-height: 15px;
   color: #d7001a;
+  float: left;
 }
 .tx-wrapper .tx-errortext.tx-errortext-visible {
   visibility: visible;
@@ -126,20 +140,20 @@
 .tx-wrapper-textarea div {
   border-bottom: 1px solid #9b9b9b;
 }
-.tx-wrapper-textarea div:after {
+pa .tx-wrapper-textarea div:after {
   display: none;
 }
 .tx-wrapper-textarea .tx-input,
 .tx-wrapper-textarea textarea {
   padding: 0;
-  margin-top: 2px;
-  margin-bottom: 2px !important;
   resize: none;
   height: 18px;
   vertical-align: text-top;
 }
 .tx-wrapper > div {
   border-bottom: 1px solid #9b9b9b;
+  padding-bottom: 4px;
+  min-height: 25px;
 }
 .tx-wrapper > div:after {
   display: none;
