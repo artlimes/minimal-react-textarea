@@ -93,7 +93,7 @@ class MinimalReactTextarea extends MinimalReactText {
   }
 
   getValue({ valueLink, value, inputValue }) {
-    valueLink ? valueLink.value || valueLink.inputValue : value || inputValue;
+    valueLink ? (valueLink.value || valueLink.inputValue) : (value || inputValue);
   }
 
   saveDOMNodeRef(ref) {
