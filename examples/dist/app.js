@@ -218,7 +218,7 @@ var MinimalReactTextarea = (function (_MinimalReactText) {
       var value = _ref.value;
       var inputValue = _ref.inputValue;
 
-      valueLink ? valueLink.value || valueLink.inputValue : value || inputValue;
+      return valueLink ? valueLink.inputValue || valueLink.value : inputValue || value;
     }
   }, {
     key: 'saveDOMNodeRef',
