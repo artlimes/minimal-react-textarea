@@ -82,7 +82,7 @@ class MinimalReactTextarea extends MinimalReactText {
 
   componentDidUpdate() {
     if (this.getValue(this.props) !== this.currentValue) {
-    () =>   this.dispatchEvent(UPDATE);
+      () =>   this.dispatchEvent(UPDATE);
     }
   }
 
@@ -92,8 +92,8 @@ class MinimalReactTextarea extends MinimalReactText {
     });
   }
 
-  getValue({ valueLink, value }) {
-    valueLink ? valueLink.value : value;
+  getValue({ valueLink, value, inputValue }) {
+    valueLink ? valueLink.value || valueLink.inputValue : value || inputValue;
   }
 
   saveDOMNodeRef(ref) {
