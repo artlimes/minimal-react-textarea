@@ -81,7 +81,7 @@ class MinimalReactTextarea extends MinimalReactText {
   }
 
   componentDidUpdate() {
-    return this.dispatchEvent(UPDATE);
+    this.dispatchEvent(UPDATE);
   }
 
   updateLineHeight() {
