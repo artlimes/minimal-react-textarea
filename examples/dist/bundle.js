@@ -769,15 +769,6 @@ var MinimalReactTextarea = (function (_MinimalReactText) {
       });
     }
   }, {
-    key: 'getValue',
-    value: function getValue(_ref) {
-      var valueLink = _ref.valueLink;
-      var value = _ref.value;
-      var inputValue = _ref.inputValue;
-
-      return valueLink ? valueLink.inputValue || valueLink.value : inputValue || value;
-    }
-  }, {
     key: 'saveDOMNodeRef',
     value: function saveDOMNodeRef(ref) {
       var innerRef = this.props.innerRef;

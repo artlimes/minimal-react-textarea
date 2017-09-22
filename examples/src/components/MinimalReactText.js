@@ -97,10 +97,6 @@ class MinimalReactTextarea extends MinimalReactText {
     });
   }
 
-  getValue({ valueLink, value, inputValue }) {
-    return valueLink ? (valueLink.inputValue || valueLink.value) : (inputValue || value);
-  }
-
   saveDOMNodeRef(ref) {
     const { innerRef } = this.props;
 
