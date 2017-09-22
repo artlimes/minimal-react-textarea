@@ -753,11 +753,11 @@ var MinimalReactTextarea = (function (_MinimalReactText) {
     value: function componentDidUpdate() {
       var _this3 = this;
 
-      // if (this.getValue(this.props) !== this.currentValue) {
-      (function () {
-        return _this3.dispatchEvent(UPDATE);
-      });
-      // }
+      if (true) {
+        (function () {
+          return _this3.dispatchEvent(UPDATE);
+        });
+      }
     }
   }, {
     key: 'updateLineHeight',
